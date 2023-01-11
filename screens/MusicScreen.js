@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 
 /*import Musicitem from  './components/MusicItem';*/
 
@@ -27,30 +27,23 @@ const MusicScreen = ({navigation}) =>{
         getMusic();
     }, []);
 
-  /* const [input, setInput] = useState("");
-    console.log(input);*/
+   
 
     return (
         <View style={styles.screen}>
-            <FlatList 
-            data={music}
-            keyExtractor={item => item.id}
-            
-            renderItem={({item}) => (
-                /*<MusicScreen
-                id={item.id}
-                title={item.title.rendered}
-                
-                />*/
-           <View>
+           <FlatList
+          keyExtractor={item => item.id.toString()}
+          data={music}
+          renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })}>
+                <View>
                 <Text>{item.template.rendered}</Text>
-                <Text>{item.title.rendered}</Text>
-                <Text>{item.content.rendered}</Text>
-                
-            </View>
-          /*  <Text>{item.excerpt.rendered}</Text>*/
-    )}
-    />
+                  <Text>{item.title.rendered}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }
+        />
         </View>
     );
 }

@@ -3,11 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const MusicItem = props => {
   return (
-    
+    <TouchableOpacity activeOpacity={0.5} onPress={() => props.onSelectMovie(props.id)}>
       <View style={styles.musicItem}>
         <Text>{props.title}</Text>
+        <Text>{props.content}</Text>
+        <Text>{props.template}</Text>
       </View>
-    
+    </TouchableOpacity>
 
   );
 }
