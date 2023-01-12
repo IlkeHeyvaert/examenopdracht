@@ -32,14 +32,7 @@ const FavoritesScreen = ({navigation}) =>{
     return (
         <View style={styles.screen}>
 <View style={styles.flexbox2}>
-            <Text style={styles.products}>The Music</Text>
-            <View style={styles.shoppingcart}>
-              <Image
-                  style={styles.icon}
-                  source={{uri: 'https://cdn-icons-png.flaticon.com/512/1413/1413908.png'}}
-                />
-              <Text style={styles.number}>0</Text>
-            </View>
+            <Text style={styles.products}>The Favorite Music</Text>
           </View>
 
            <FlatList

@@ -6,7 +6,7 @@ const MusicItem = props => {
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.musicItem}>
         <Text>{props.title}</Text>
-        <Text>{props.content}</Text>
+        
       </View>
     </TouchableOpacity>
 
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
     borderColor: 'blue',
-    borderStyle: 'dashed',
-    borderWidth: 0.5,
+    borderStyle: 'solid',
+    borderWidth: 2,
   }
 });
 export default MusicItem;
