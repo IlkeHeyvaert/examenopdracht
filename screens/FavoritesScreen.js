@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, ScrollView, TouchableOpacity, Button} from 'react-native';
 
-
 import MusicItem from  '../components/MusicItem.js';
 
-const MusicScreen = ({navigation}) =>{
+const FavoritesScreen = ({navigation}) =>{
 
   
 
@@ -32,28 +31,32 @@ const MusicScreen = ({navigation}) =>{
 
     return (
         <View style={styles.screen}>
+<View style={styles.flexbox2}>
+            <Text style={styles.products}>The Music</Text>
+            <View style={styles.shoppingcart}>
+              <Image
+                  style={styles.icon}
+                  source={{uri: 'https://cdn-icons-png.flaticon.com/512/1413/1413908.png'}}
+                />
+              <Text style={styles.number}>0</Text>
+            </View>
+          </View>
+
            <FlatList
           keyExtractor={item => item.id.toString()}
           data={music}
           renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })}>
-                <MusicItem
-                id={item.id}
-                title={item.title.rendered}
-                
-                />
-              </TouchableOpacity>
-            )
-          }
+            <MusicItem
+            title={item.title.rendered}
+            imageUri={{uri: 'https://ilkeheyvaertdevelopment3.be/mercy-shawn-mendes/'}}
+            />
+  
+          )}
           
         />
         <Button
           title="Go to Profile"
           onPress={() => navigation.navigate('Profile')}
-        />
-        <Button
-          title="Go to Favorites"
-          onPress={() => navigation.navigate('Favorites')}
         />
         </View>
     );
@@ -66,5 +69,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
-export default MusicScreen;
+export default FavoritesScreen;
 
