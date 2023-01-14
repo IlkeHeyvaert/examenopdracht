@@ -66,11 +66,11 @@ const MusicScreen = ({navigation}) =>{
     return (
         <View style={styles.screen}>
            <FlatList
-          keyExtractor={item => item.id.toString()}
           numColumns={2}
           data={music}
           renderItem={({ item }) => (
             <MusicItem
+            id={item.id}
             title={item.title.rendered}
             image= {item._embedded['wp:featuredmedia']['0'].source_url}
             addFavorites={addFavorites}

@@ -10,6 +10,7 @@ const FavoritesScreen = ({ route, navigation }) => {
     return(
     <View>
          <FlatList //lussen, zoals for loop
+           
         data={route.params.favorites}
         renderItem={({ item }) => (
           <FavoritesItem
