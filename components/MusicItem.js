@@ -1,25 +1,42 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Button, TouchableWithoutFeedback } from 'react-native';
 
-const MusicItem = props => {
+
+
+const MusicItem = (props) => {
+
+
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity style={styles.musicItems} activeOpacity={0.5}  onPress={() => props.onSelectMusic(props.id)}>
       <View style={styles.musicItem}>
+      <Image style={styles.image}  source={{uri: props.image, }} />
         <Text>{props.title}</Text>
-        
       </View>
-    </TouchableOpacity>
+      <TouchableWithoutFeedback onPress = {() => props.addFavorites(props.id) }>
+        <Text  style = {styles.button}>Toevoegen aan favorieten</Text>
+      </TouchableWithoutFeedback>
+    </TouchableOpacity >
 
   );
 }
 
 const styles = StyleSheet.create({
+musicItems: {
+    flex: 1,
+    alignItems: 'center',
+  },
   musicItem: {
+    margin: 10,
     padding: 10,
     marginVertical: 5,
     borderColor: 'blue',
     borderStyle: 'solid',
     borderWidth: 2,
-  }
+    alignItems: 'center',
+  },
+  image:{
+    width: 100,
+    height: 100,
+  },
 });
 export default MusicItem;
