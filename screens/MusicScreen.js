@@ -8,20 +8,8 @@ const MusicScreen = ({navigation}) =>{
   const [filter, setFilters] =  useState(0);
   const [music, setMusic] = useState([]); 
   const  [favorites, setFavorites] = useState ([]);
+  const  [profile, setProfile] = useState ([]);
 
-  // Functies om de filters in te stellen
-  const snowboard = () => { 
-    setFilters((currentfilter) => currentfilter = 9); 
-  }
-  const ski = () => {
-    setFilters((currentfilter) => currentfilter = 10); 
-  }
-  const wandelen = () => {
-    setFilters((currentfilter) => currentfilter = 8);
-  }
-  const reset = () => {
-    setFilters((currentfilter) => currentfilter = 0);
-  }
   
   const getMusic = async () => { //-> assincrone functie, pas na een tijd uitgevoerd, je weet wanneer, pas api wanneer app al klaar staat
     if(filter === 0){
@@ -84,7 +72,7 @@ const MusicScreen = ({navigation}) =>{
         <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Favorites', {favorites: favorites} ) }}>
         <Text  style = {styles.button}>Go to favorites</Text>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Profile', {profiles: profiles} ) }}>
+      <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Profile', {profile: profile} ) }}>
         <Text  style = {styles.button}>Go to profile</Text>
       </TouchableWithoutFeedback>
         
