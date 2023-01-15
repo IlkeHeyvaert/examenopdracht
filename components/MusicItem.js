@@ -26,12 +26,11 @@ musicItems: {
     alignItems: 'center',
   },
   musicItem: {
-    margin: 10,
-    padding: 10,
+    margin: 20,
+    padding: 20,
     marginVertical: 5,
-    borderColor: 'blue',
-    borderStyle: 'solid',
-    borderWidth: 2,
+    backgroundColor: 'blue',
+    
     alignItems: 'center',
   },
   image:{

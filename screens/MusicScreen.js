@@ -5,14 +5,15 @@ import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, ScrollVie
 import MusicItem from  '../components/MusicItem.js';
 
 const MusicScreen = ({navigation}) =>{
-  const [filter, setFilters] =  useState(0);
+  
   const [music, setMusic] = useState([]); 
   const  [favorites, setFavorites] = useState ([]);
   const  [profile, setProfile] = useState ([]);
 
-  
+
+    
   const getMusic = async () => { //-> assincrone functie, pas na een tijd uitgevoerd, je weet wanneer, pas api wanneer app al klaar staat
-    if(filter === 0){
+    
       try { //stuk code proberen als het niet lukt, error afprinten
         const response = await fetch("https://ilkeheyvaertdevelopment3.be/wp-json/wp/v2/posts?categories=4&_embed&per_page=20", { //data ophalen alles, response = wat je terugkrijgr van API = resultaat, await= //wachten tot fetch klaar is, !belangrijk!
           "method": "GET", //GET = data ophalen, POST = data verzenden
@@ -24,19 +25,7 @@ const MusicScreen = ({navigation}) =>{
         console.error(error);  
       }
     }
-    else {
-      try { //stuk code proberen als het niet lukt, error afprinten
-        const response = await fetch("https://ilkeheyvaertdevelopment3.be/wp-json/wp/v2/posts?categories=4&categories="+ filter +"&_embed&per_page=20", { //data ophalen toegepast op de filter, response = wat je terugkrijgt van API = resultaat, await= //wachten tot fetch klaar is, !belangrijk!
-          "method": "GET", //GET = data ophalen, POST = data verzenden
-        })
-        const json = await response.json(); //naar het  juiste bestandsformaat omzetten
-        setMusic(json);
-      } 
-      catch (error) {
-        console.error(error);
-      }
-    }
-  }
+   
 
     useEffect(() => {
         getMusic();
@@ -51,8 +40,39 @@ const MusicScreen = ({navigation}) =>{
   
     console.log(music);
 
+   
+         
+//laad search results wanneer je in textinput typt
+const getMusicByTitleSearch = async (enteredText) => {//argument meegegeven door onChangeText
+  try {
+    if (enteredText.length > 3) {
+     
+      const response = await fetch("https://ilkeheyvaertdevelopment3.be/wp-json/wp/v2/posts?categories/byTitle/" + enteredText + "/", { //data ophalen alles, response = wat je terugkrijgr van API = resultaat, await= //wachten tot fetch klaar is, !belangrijk!
+          "method": "GET", //GET = data ophalen, POST = data verzenden
+        })
+      const json = await response.json();
+      console.log(json);
+      setMusic(json.results);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
     return (
         <View style={styles.screen}>
+          <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Favorites', {favorites: favorites} ) }}>
+        <Text  style = {styles.button}>Go to favorites</Text>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Profile', {profile: profile} ) }}>
+        <Text  style = {styles.button}>Go to profile</Text>
+      </TouchableWithoutFeedback>
+         <View style={styles.search}>
+         <TextInput
+        placeholder="search music"
+        style={styles.input}
+        onChangeText={getMusicByTitleSearch}//geeft argument enteredText mee, denk aan de taskInputHandler uit de todo app.
+      /></View> 
            <FlatList
           numColumns={2}
           data={music}
@@ -69,13 +89,8 @@ const MusicScreen = ({navigation}) =>{
           }
           
         />
-        <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Favorites', {favorites: favorites} ) }}>
-        <Text  style = {styles.button}>Go to favorites</Text>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Profile', {profile: profile} ) }}>
-        <Text  style = {styles.button}>Go to profile</Text>
-      </TouchableWithoutFeedback>
         
+      
 
         </View>
     );
@@ -83,23 +98,12 @@ const MusicScreen = ({navigation}) =>{
 
 const styles = StyleSheet.create({
   screen: {
-    paddingVertical: 50,
-   
+    paddingVertical: 40,
+    
   },
-  filters:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    bottom: 45,
-  },
-  filter:{
-    backgroundColor: "#F37E21", //oranje
-    color: "white",
-    textAlign:"center",
-    borderRadius: 5,
-    padding: 7,
-    textTransform: "uppercase",
-    margin: 7,
+  search: {
+    paddingLeft: 50,
+    paddingTop: -60,
   },
   music:{
     bottom:45,
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign:"center",
     padding: 11,
-    bottom: 30, 
+    bottom: 34, 
     textTransform: "uppercase"
   }
 });

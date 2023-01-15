@@ -7,7 +7,7 @@ const FavoritesItem = (props) => {
 
 
   return (
-    <TouchableOpacity activeOpacity={0.5}  onPress={() => props.onSelectMusic(props.id)}>
+    <TouchableOpacity activeOpacity={0.5}  >
       <View style={styles.musicItem}>
         <Text>{props.title}</Text>
         <Image style={styles.image} source={{ uri: props.image, }}

@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, ScrollVie
 
 const supportedURL = 'https://ilkeheyvaertdevelopment3.be';
 
-const ProfileScreen = (navigation) =>{
+const ProfileScreen = ({navigation}) =>{
 
   const OpenURLButton = ({url, children}) => {
     const handlePress = useCallback(async () => {
@@ -49,9 +49,9 @@ const ProfileScreen = (navigation) =>{
       <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
     </View>
       </View>
-      <TouchableWithoutFeedback  onPress={() => { navigation.navigate('Music', {music: music} ) }}>
-  <Text  style = {styles.button}>Go to profile</Text>
-</TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('Music')}>
+        <Text style = {styles.button}>Go back to music</Text>
+      </TouchableWithoutFeedback>
         </View>
     );
 }
