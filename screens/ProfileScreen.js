@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button:{
-    backgroundColor: "#6CA9D9", //lightblue
+    backgroundColor: "#3883C5",
     color: "white",
     textAlign:"center",
     padding: 11,
