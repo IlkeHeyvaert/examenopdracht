@@ -15,7 +15,7 @@ const MusicScreen = ({navigation}) =>{
   const getMusic = async () => { //-> assincrone functie, pas na een tijd uitgevoerd, je weet wanneer, pas api wanneer app al klaar staat
     
       try { //stuk code proberen als het niet lukt, error afprinten
-        const response = await fetch("https://ilkeheyvaertdevelopment3.be/wp-json/wp/v2/posts?categories=4&_embed&per_page=20", { //data ophalen alles, response = wat je terugkrijgr van API = resultaat, await= //wachten tot fetch klaar is, !belangrijk!
+        const response = await fetch("https://ilkeheyvaertdevelopment3.be/wp-json/wp/v2/posts?categories=4&_embed&per_page=20", { //data ophalen alles, response = wat je terugkrijgt van API = resultaat, await= //wachten tot fetch klaar is, !belangrijk!
           "method": "GET", //GET = data ophalen, POST = data verzenden
         })
         const json = await response.json(); //naar het  juiste bestandsformaat omzetten
@@ -32,8 +32,9 @@ const MusicScreen = ({navigation}) =>{
     }, []);
 
     const addFavorites = (id) => {
-      const favorite = music.find( c => c.id == id); //het juiste product zoeken in de array van alle posts
-      if(favorites.includes(favorite) === false) { //als het product nog niet terug gevonden is in de array van de favorieten, dan pas toevoegen --> geen dubbele producten
+      const favorite = music.find( c => c.id == id); //de juiste muziek zoeken in de array van alle posts
+      if(favorites.includes(favorite) === false) { //als de muziek nog niet terug gevonden is in de array van de favorieten, dan pas toevoegen --> geen dubbele muziek
+        
         setFavorites((currentFavorites) => [...currentFavorites, favorite ]  );
       }
     }
